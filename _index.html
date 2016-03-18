@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="styles/font-awesome.css" rel="stylesheet">
+    <script src="js/lib/jquery/jquery-1.10.2.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.js"></script>
+    <style>
+        .carousel-inner>.item>img,.carousel-inner>.item>a>img{
+            width:1500px;
+            height:510px;
+        }
+        .carousel-indicators .active{
+            background:green;
+        }
+        .carousel-indicators{
+            position: absolute;
+            bottom: 0;
+            left:110%;
+            z-index:15;
+
+            padding-left: 0;
+            margin-left:-30%;
+            text-align: center;
+            list-style-type: none;
+            width:170px;
+        }
+        .carousel-caption{
+            background: rgba(0,0,0,.5);
+            height:25px;
+            line-height: 20px;
+            font-size: 20px;
+            position: absolute;
+            right:15%;
+            left:0;
+            z-index:10;
+            color:#fff;
+            padding-top:8px;
+            padding-left:5px;
+            text-align: left;
+            text-shadow: 0 1px 2px rgba(0,0,0,.6);
+            width:100%;
+        }
+    </style>
+    <script>
+        $(function(){
+           console.log(localStorage.getItem("username"));
+           $("#loginbtn").html(localStorage.getItem("username"));
+            ///////注销/////////////////////
+            $("#logoutbtn").click(function(){
+                $("#loginbtn").html("登录");
+                //移除本地localStorage
+                localStorage.removeItem("username");
+                window.location="index.html";
+            });
+        });
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="_index.html" id="index" style="color:black;font-weight: bolder">校园节能平台</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="homepage.html">首页</a></li>
+                <li><a href="energy-search.html" id="energy-search">用电查询</a></li>
+                <li><a href="data-analysis.html">数据分析</a></li>
+                <li><a href="remote-control.html">远程监控</a></li>
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                <button class="btn btn-primary btn-lg" id="loginbtn">登录</button>
+                <button class="btn btn-primary btn-lg" id="logoutbtn">注销</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="imgs/banner1.jpg" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="imgs/22.jpg" alt="...">
+            <div class="carousel-caption">
+
+            </div>
+        </div>
+        <div class="item">
+            <img src="imgs/12.jpg" alt="...">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <img src="imgs/55.jpg" alt="...">
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+</body>
+</html>

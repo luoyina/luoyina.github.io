@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="styles/font-awesome.css" rel="stylesheet">
+    <script src="js/lib/jquery/jquery-1.10.2.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.js"></script>
+    <style>
+        .content{
+            margin-top:20px;
+             margin-left:50px;
+            width:950px;
+            height:550px;
+            float:left;
+        }
+        .sidebar{
+            float:left;
+            width:200px;
+            height:200px;
+            margin-top:55px;
+        }
+        .sidebar p{
+            font-size:16px;
+        }
+        .switchclass{
+            transform:rotate(90deg);
+            left:99px;
+            border:1px solid red;
+        }
+    </style>
+    <script>
+        $(function(){
+            //console.log(localStorage.getItem("username"));
+            $("#loginbtn").html(localStorage.getItem("username"));
+            ///////注销/////////////////////
+            $("#logoutbtn").click(function(){
+                $("#loginbtn").html("登录");
+                //移除本地localStorage
+                localStorage.removeItem("username");
+                window.location="index.html";
+            });
+            console.log($(".switch").length);
+            console.log($(".fill").length);
+            $.ajax({
+                "url": "remote.php",
+                "type": "post",
+                success: function (_data) {
+                    var str = eval(_data);
+                    var fill=null;
+                    console.log(str);
+                    var rand=parseInt(Math.random()*5);
+                       $(".switch").each(function(index){
+                           $(this).click(function(){
+                               switch(index){
+                                   case 0:fill=str[rand].teachbuild1;
+                                       break;
+                                   case 1:fill=str[rand].teachbuild2;
+                                       break;
+                                   case 2:fill=str[rand].libray;
+                                       break;
+                                   case 3:fill=str[rand].admin;
+                                       break;
+                                   case 4:fill=str[rand].college;
+                                       break;
+                                   case 5:fill=str[rand].canteen1;
+                                       break;
+                                   default:fill=str[rand].canteen2;
+                               }
+                               if(parseInt($(".switch").eq(index).css("left"))==84){
+                                   $(".switch").eq(index).css({"transform": "rotate(90deg)"})
+                                           .css({"left": "99px"});
+                                   $(".fill").eq(index).html("0");
+                               } else if(parseInt($(".switch").eq(index).css("left"))==99){
+                                   $(".switch").eq(index).css({"transform":"rotate(60deg)"})
+                                           .css({"left":"84px"});
+                                   $(".fill").eq(index).html(fill);
+                               }
+                           })
+                       })
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" id="index">校园节能平台</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown"><a href="homepage.html">首页</a></li>
+                <li class="dropdown"><a href="energy-search.html" id="energy-search">用电查询 </a></li>
+                <li class="dropdown"><a href="data-analysis.html">数据分析</a></li>
+                <li class="dropdown" ><a href="remote-control.html" style="color:black;font-weight: bolder">远程监控</a></li>
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                <button class="btn btn-primary btn-lg" id="loginbtn">登录</button>
+                <button class="btn btn-primary btn-lg" id="logoutbtn">注销</button>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="content">
+    <h4>来自外部电源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校区内某变电站配电柜实时监控</h4>
+    <div style="width:100px;height:490px;border:2px solid black;border-top:0; float:left;margin-left:20px;position:relative;">
+        <div class="allswitch" style="width: 50px; height: 50px; border-bottom: 1px solid black;  position: absolute; left: -1px; top: 308px;background:white;transform:rotate(90deg);"> </div>
+        <div style="width: 50px; height: 50px;position: absolute; left: -31px; top: 349px;">
+            <img src="imgs/vvvv.png">
+        </div>
+        <div style="width: 50px; height: 50px; position: absolute; left: -31px; top: 107px;-webkit-transform:rotate(180deg);">
+            <img src="imgs/tra.png">
+        </div>
+        <div style="width: 50px; height: 50px; border: 1px solid white; position: absolute; left: -22px; top: 179px;"> </div>
+    </div>
+    <div style="float:left;width:800px;height:490px;border:2px solid black;border-left:0;border-bottom:0;">
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left;position:relative;">
+            <div class="switch" style=" width: 50px; height: 50px; border-bottom: 1px solid green;position: absolute; left: 99px; top: 47px;background:white;transform:rotate(90deg);"> </div>
+            <div style="width: 50px; height: 50px;  position: absolute; left: 80px; top: 225px; ">
+                <img src="imgs/tra.png">
+            </div>
+            <div style="width: 60px; height: 50px; position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div style="width: 45px; height: 30px; position: absolute; left: 88px; top: 430px;">
+                kWh
+            </div>
+            <div  class="fill" style="width: 50px; height: 30px; position: absolute; left: 85px; top: 405px;color:blue">
+            89.96
+            </div>
+            <div style="width: 70px; height: 30px; position: absolute; left: 76px; top: 377px;color:green;">
+                一号教学楼
+            </div>
+        </div>
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left; position:relative;">
+            <div class="switch" style="width: 55px; height: 55px; border-bottom: 1px solid green; position: absolute; left: 82px; top: 47px;background:white;transform:rotate(60deg);"> </div>
+            <div style="width: 50px; height: 50px;  position: absolute; left: 80px; top: 225px;">
+                <img src="imgs/tra.png">
+            </div>
+            <div style="width: 60px; height: 50px;  position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div style="width: 50px; height: 30px;  position: absolute; left: 88px; top: 430px;">
+                kWh
+            </div>
+            <div  class="fill" style="width: 50px; height: 30px; position: absolute; left: 85px; top: 405px;color:blue">
+            0
+            </div>
+            <div style="width: 70px; height: 30px; position: absolute; left: 68px; top: 377px;color:green;">
+                二号教学楼
+            </div>
+        </div>
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left;position:relative;">
+            <div class="switch" style="width: 50px; height: 50px; border-bottom: 1px solid green; position: absolute; left: 99px; top: 51px;background:white;transform:rotate(90deg);"> </div>
+            <div style="width: 50px; height: 50px;position: absolute; left: 80px; top: 225px;">
+                <img src="imgs/tra.png">
+            </div>
+            <div style="width: 60px; height: 50px;position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div style="width: 50px; height: 30px;position: absolute; left:88px; top: 430px;">
+                kWh
+            </div>
+            <div  class="fill" style="width: 50px; height: 20px; position: absolute; left: 85px; top: 405px;color:blue;">
+            97.20
+            </div>
+            <div style="width: 50px; height: 30px;  position: absolute; left: 74px; top: 377px;color:green;">
+                图书馆
+            </div>
+        </div>
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left;position:relative;">
+            <div style="width: 60px; height: 50px; position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div style="width: 50px; height: 50px; position: absolute; left: 80px; top: 225px;">
+                <img src="imgs/tra.png">
+            </div>
+            <div class="switch" style="width: 50px; height: 50px; border-bottom: 1px solid green; position: absolute; left: 83px; top: 46px;background:white;transform:rotate(60deg);"> </div>
+            <div style="width: 50px; height: 30px;position: absolute; left: 88px; top: 430px;">
+                kWh
+            </div>
+            <div style="width: 50px; height: 30px; position: absolute; left: 73px; top: 377px;color:green;">
+                行政楼
+            </div>
+            <div  class="fill" style="width: 50px; height: 30px; position: absolute; left: 85px; top: 405px;color:blue;">
+            0
+            </div>
+        </div>
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left;position:relative;">
+            <div style="width: 50px; height: 50px; position: absolute; left: 80px; top: 225px;">
+                <img src="imgs/tra.png">
+            </div>
+            <div style="width: 60px; height: 50px; position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div class="switch" style="width: 50px; height: 50px; border-bottom: 1px solid green; position: absolute; left: 99px; top: 50px;background:white;transform:rotate(90deg);"> </div>
+            <div style="width: 50px; height: 30px; position: absolute; left: 88px; top: 430px;">
+                kWh
+            </div>
+            <div  class="fill" style="width: 50px; height: 30px;  position: absolute; left: 85px; top: 405px;color:blue;">
+            71.47
+            </div>
+            <div style="width: 50px; height: 30px; position: absolute;  left: 76px; top: 377px;color:green;">
+                学院楼
+            </div>
+        </div>
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left;position:relative;">
+            <div style="width: 50px; height: 50px; position: absolute; left: 80px; top: 225px;">
+                <img src="imgs/tra.png">
+            </div>
+            <div style="width: 60px; height: 50px;  position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div class="switch" style="width: 50px; height: 50px; border-bottom: 1px solid green; position: absolute; left: 99px; top: 50px;background:white;transform:rotate(90deg);"> </div>
+            <div style="width: 40px; height: 30px; position: absolute; left: 88px; top: 430px;">
+                kWh
+            </div>
+            <div  class="fill" style="width: 50px; height: 30px; position: absolute; left: 85px; top: 405px;color:blue;">
+            60.29
+            </div>
+            <div style="width: 60px; height: 30px; position: absolute; left: 76px; top: 377px;color:green;">
+                第一食堂
+            </div>
+        </div>
+        <div style="width: 100px; height:360px; border-right: 2px solid green;float:left;position:relative;">
+            <div style="width: 50px; height: 50px; position: absolute;  left: 80px; top: 225px;">
+                <img src="imgs/tra.png">
+            </div>
+            <div style="width: 60px; height: 50px;position: absolute; left: 69px; top: 115px;">
+                <img src="imgs/vvvv.png">
+            </div>
+            <div class="switch" style="width: 50px; height: 50px; border-bottom: 1px solid green; position: absolute; left: 99px; top: 50px;background:white;transform:rotate(90deg);"> </div>
+            <div style="width: 40px; height: 30px; position: absolute; left: 88px; top: 430px;">
+                kWh
+            </div>
+            <div  class="fill" style="width: 50px; height: 30px; position: absolute; left: 85px; top: 405px;color:blue;">
+            57.84
+            </div>
+            <div style="width: 60px; height: 30px;position: absolute; left: 76px; top: 377px;color:green;">
+                第二食堂
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sidebar">
+    <p>
+        <span>二段低压总电表</span>
+    </p>
+<p>
+    <span>Ua:  <span style="color:green;font-weight:bolder;">226.22</span>  V</span>
+</p>
+    <p>
+        <span>Ub:  <span style="color:green;font-weight:bolder;">226.22</span>  V</span>
+    </p>
+    <p>
+        <span>Uc:  <span style="color:green;font-weight:bolder;">226.22</span>  V</span>
+    </p>
+    <p>
+        <span>Ia:  <span style="color:green;font-weight:bolder;">38.50</span>  V</span>
+    </p>
+    <p>
+        <span>Ib:  <span style="color:green;font-weight:bolder;">38.50</span>  V</span>
+    </p>
+    <p>
+        <span>Ic:  <span style="color:green;font-weight:bolder;">25.45</span>  V</span>
+    </p>
+    <p>
+        <span>W:  <span style="color:green;font-weight:bolder;">376.76</span>  Kw.h</span>
+    </p>
+</div>
+</body>
+</html>

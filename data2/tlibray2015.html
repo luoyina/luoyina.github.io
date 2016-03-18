@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../styles/bootstrap.css" rel="stylesheet">
+    <link href="../styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="../styles/font-awesome.css" rel="stylesheet">
+    <script src="../js/lib/jquery/jquery-1.10.2.js"></script>
+    <script src="../js/lib/bootstrap/bootstrap.js"></script>
+    <script src="../js/lib/chartjs/chart.js"></script>
+    <style>
+        h4{
+            margin-left:100px;
+            vertical-align: middle;
+            float:left;
+        }
+        .choose{
+            float:left;
+            width:100px;
+            height:30px;
+            margin-left:50px;
+            margin-top:5px;
+            border-radius:5px;
+        }
+        .canvas{
+            margin-left:50px;
+            width:650px;
+            height:350px;
+        }
+
+    </style>
+    <script>
+        $(function(){
+            $.ajax({
+                "url": "tlibray2015.php",
+                "type": "post",
+                success: function (_data) {
+                    var str = eval(_data);
+                    console.log(str);
+                    var  barChartData = {
+                        labels : [],
+                        datasets : [
+                            {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                data : []
+                            }
+                        ]
+                    }
+                    for (var i = 0; i <12; i++) {
+                        barChartData.labels.push(str[i].month);
+                    }
+                    for (var j = 0; j <12; j++) {
+                        barChartData.datasets[0].data.push(str[j].number);
+                    }
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myLine = new Chart(ctx).Bar(barChartData, {
+                        responsive : true
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div  style="width:800px;height:500px;">
+    <h4 style="margin-left:310px;">图书馆2015年度电量分析查询</h4>
+    <br>
+    <p style="display:block;margin-top:20px;margin-left:20px;" >单位：度</p>
+    <canvas id="canvas" class="canvas"></canvas>
+</div>
+<h5 style="margin-left:810px;clear:both;">单位：月</h5>
+</body>
+</html>

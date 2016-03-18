@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="styles/font-awesome.css" rel="stylesheet">
+    <script src="scripts/jquery-1.10.2.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/chart.js"></script>
+    <script>
+        $(function(){
+            //var arr=[];
+            console.log($("option:selected").val());
+            $.ajax({
+                "url": "bar.php",
+                "type": "post",
+                success: function (_data) {
+                    var str = eval(_data);
+                    var lineChartData= {
+                        labels : [],
+                        datasets : [
+                            {
+                                //label: "My First dataset",
+                                fillColor : "rgba(220,220,220,0)",
+                                strokeColor : "gray",
+                               // pointColor : "lightblue",
+                               // pointStrokeColor : "#fff",
+                                //pointHighlightFill : "#fff",
+                                //pointHighlightStroke : "rgba(220,220,220,1)",
+                                data : []
+                            },
+                            {
+                               /// label: "My First dataset",
+                                fillColor : "rgba(220,220,220,0)",
+                                strokeColor : "black",
+                               // pointColor : "pink",
+                               // pointStrokeColor : "#fff",
+                                //pointHighlightFill : "#fff",
+                                //pointHighlightStroke : "rgba(220,220,220,1)",
+                                data : []
+                            },
+                        ]
+                    }
+                    for (var i = 0; i < str.length; i++) {
+                        //arr.push(str[i].time);
+                        lineChartData.labels.push(str[i].date01);
+                        //console.log(str[i].date);
+                    }
+                    for (var j = 0; j < str.length; j++) {
+                        //arr.push(str[i].time);
+                        // console.log(str[j].number)
+                        lineChartData.datasets[0].data.push(str[j].number01);
+                        lineChartData.datasets[1].data.push(str[j].number02);
+                    }
+                    //console.log(lineChartData.labels);
+                    //console.log(arr);
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive: true
+                    });
+                   /* var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myBar = new Chart(ctx).Bar(barChartData, {
+                        responsive : true
+                    });*/
+                }
+            });
+            $("select").change(function(){
+                $.ajax({
+                    "url": "bar.php",
+                    "type": "post",
+                    success: function (_data) {
+                        var str = eval(_data);
+                        console.log();
+                        var lineChartData = {
+                            labels : [],
+                            datasets : [
+                                {
+                                    label: "My First dataset",
+                                    fillColor : "rgba(220,220,220,0)",
+                                    strokeColor : "black",
+                                    pointColor : "black",
+                                    pointStrokeColor : "#fff",
+                                    pointHighlightFill : "#fff",
+                                    pointHighlightStroke : "rgba(220,220,220,1)",
+                                    data : []
+                                },
+                            ]
+                        }
+                        if($("option:selected").val()=="201502"){
+                        for (var i = 0; i < 27; i++) {
+                            //arr.push(str[i].time);
+                            lineChartData.labels.push(str[i].date02);
+                            //console.log(str[i].date);
+                        }
+                        for (var j = 0; j < 27; j++) {
+                            //arr.push(str[i].time);
+                            // console.log(str[j].number)
+                            lineChartData.datasets[0].data.push(str[j].number02);
+                        }
+                        }
+                        else if($("option:selected").val()=="201503"){
+                            for (var a = 0; a < 27; a++) {
+                                //arr.push(str[i].time);
+                                lineChartData.labels.push(str[a].date01);
+                                //console.log(str[i].date);
+                            }
+                            for (var b = 0; b < 27; b++) {
+                                //arr.push(str[i].time);
+                                // console.log(str[j].number)
+                                lineChartData.datasets[0].data.push(str[b].number01);
+                            }
+                        }  else if($("option:selected").val()=="201501"){
+                            for (var a = 0; a < 27; a++) {
+                                //arr.push(str[i].time);
+                                lineChartData.labels.push(str[a].date01);
+                                //console.log(str[i].date);
+                            }
+                            for (var b = 0; b < 27; b++) {
+                                //arr.push(str[i].time);
+                                // console.log(str[j].number)
+                                lineChartData.datasets[0].data.push(str[b].number01);
+                            }
+                        }
+                        var ctx = document.getElementById("canvas").getContext("2d");
+                        window.myLine = new Chart(ctx).Line(lineChartData, {
+                            responsive: true
+                        });
+                    }
+                });
+            })
+        });
+        $(function(){
+            $("#submitconfirm").click(function(){
+                $.ajax({
+                    "url":"submit.php",
+                    "type":"post",
+                    "data":{
+                        "username":$("#inputusername").val(),
+                        "password":$("#inputpassword").val()
+                    },
+                    success:function(_data){
+
+                        if(_data="ok"){
+                            $("#submit").html($("#inputusername").val());
+                        }else if(_data="failed"){
+                            $("#submit").html("登录");
+                            $("#myModal").modal("show");
+                            $("#index").append("用户名或密码错误");
+                            $("#energy-search").css({"disabled":"true"});
+                        }
+                    }
+                });
+            });
+        })
+    </script>
+    <style>
+        .carousel-inner>.item>img,.carousel-inner>.item>a>img{
+            width:1500px;
+            height:510px;
+        }
+        .carousel-indicators .active{
+            background:green;
+        }
+        .carousel-indicators{
+            position: absolute;
+            bottom: 0;
+            left:110%;
+            z-index:15;
+
+            padding-left: 0;
+            margin-left:-30%;
+            text-align: center;
+            list-style-type: none;
+            width:170px;
+        }
+        .carousel-caption{
+            background: rgba(0,0,0,.5);
+            height:25px;
+            line-height: 20px;
+            font-size: 20px;
+            position: absolute;
+            right:15%;
+            left:0;
+            z-index:10;
+            color:#fff;
+            padding-top:8px;
+            padding-left:5px;
+            text-align: left;
+            text-shadow: 0 1px 2px rgba(0,0,0,.6);
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" id="index">校园节能平台</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="#">首页</a></li>-->
+                <li class="dropdown">
+                    <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" >首页</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="energy-search">用电查询 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="search1.html">学院楼</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#search2">教学楼</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#search3">图书馆</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">实验室</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="data-analysis">数据分析<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">学院楼</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">教学楼</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">图书馆</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">实验室</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">远程监控<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">变电站监控</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="submit">登录</button>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="submit1">注销</button>
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                                <h4 class="modal-title">登录校园节能网站</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="inputusername">用户名</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                                            <input type="email" class="form-control" id="inputusername" placeholder="请输入用户名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputpassword">密码</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                                            <input type="password" class="form-control" id="inputpassword" placeholder="请输入密码">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal">忘记密码？</button>
+                                <button class="btn btn-primary" data-dismiss="modal" id="submitconfirm">登录</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
+<select class="form-control">
+    <option>201501</option>
+    <option>201502</option>
+    <option>201503</option>
+    <option>201504</option>
+    <option>201505</option>
+</select>
+<div style="width: 50%">
+    <canvas id="canvas" height="450" width="600"></canvas>
+</div>
+
+
+</body>
+</html>

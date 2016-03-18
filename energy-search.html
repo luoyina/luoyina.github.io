@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="styles/font-awesome.css" rel="stylesheet">
+    <script src="js/lib/jquery/jquery-1.10.2.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.js"></script>
+    <style>
+        .body-content{
+            width:800px;
+            height:580px;
+        }
+        #aside{
+            width:259px;
+            height:610px;
+            border-right:1px solid rgb(225,225,225);
+        }
+        .first-level{
+            width:259px;
+            height:47px;
+            line-height:47px;
+            padding-left:38px;
+            font-size:14px;
+            color:rgb(119,119,119);
+            cursor:pointer;
+            border:1px solid #e1e1e1;
+            position:relative;
+            font-weight:bold;
+            background:#f1f1f1 url(imgs/pro_left.png) center right no-repeat;
+            margin:0;
+        }
+        a{
+            color:#777;
+            text-decoration: none;
+        }
+       .current{
+            background:#f1f1f1 url(imgs/pro_down.png) center right no-repeat;
+        }
+        .second-level{
+            width:259px;
+            height:auto;
+            overflow:hidden;
+            line-height:38px;
+            border-left:1px solid #e1e1e1;
+            background:#fff;
+            border-right:1px solid #e1e1e1;
+        }
+        .second-level a{
+            display:block;
+            width:259px;
+            height:38px;
+            line-height:38px;
+            padding-left:38px;
+            color:rgb(119,119,119);
+            background:#fff;
+            text-decoration:none;
+            border-bottom:1px solid #e1e1e1;
+        }
+        .second-level a:hover{
+            text-decoration:none;
+        }
+        .body-menu{
+            float:left;
+            width:19%;
+        }
+        .body-content{
+            float:left;
+            width:70%;
+        }
+    </style>
+    <script>
+        $(function(){
+           // console.log(localStorage.getItem("username"));
+            $("#loginbtn").html(localStorage.getItem("username"));
+            ///////注销/////////////////////
+            $("#logoutbtn").click(function(){
+                $("#loginbtn").html("登录");
+                //移除本地localStorage
+                localStorage.removeItem("username");
+                window.location="index.html";
+            });
+            $(".first-level").each(function(_index,_value){
+                $(this).click(function(){
+                    $(".second-level:eq("+_index+")").slideToggle();
+                    $(this).toggleClass("current");
+                })
+            });
+        });
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+           <a class="navbar-brand" href="_index.html" id="index" style="margin-left:20px;">校园节能平台</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="homepage.html"><span class="index">首页</span></a></li>
+                <li><a href="energy-search.html" id="energy-search" style="color:black;font-weight: bolder">用电查询</a></li>
+                <li><a href="data-analysis.html">数据分析</a></li>
+                <li><a href="remote-control.html">远程监控</a></li>
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                <button class="btn btn-primary btn-lg" id="loginbtn">登录</button>
+                <button class="btn btn-primary btn-lg" id="logoutbtn">注销</button>
+            </div>
+        </div>
+    </div>
+</nav>
+        <div class="body-menu">
+            <div id="aside">
+                <ul class="list-unstyled">
+                    <li class="first-level">
+                        <a href="#" >图书馆</a>
+                    </li>
+                        <ul class="list-unstyled second-level" style="display:none;">
+                            <li id="setting-libray2015"><a href="data/libray2015.html" target="import">2015年</a></li>
+                            <li id="setting-libray2016"><a href="data/libray2016.html" target="import">2016年</a></li>
+                        </ul>
+                    <li class="first-level">
+                        <a href="#" >学院楼</a>
+                    </li>
+                        <ul class="list-unstyled second-level" style="display:none;">
+                            <li id="setting-college2015"><a href="data/college2015.html" target="import">2015年</a></li>
+                            <li id="setting-college2016"><a href="data/college2016.html" target="import">2016年</a></li>
+                        </ul>
+                    <li class="first-level">
+                        <a href="#" >行政楼</a>
+                    </li>
+                        <ul class="list-unstyled second-level" style="display:none;">
+                            <li id="setting-admin2015"><a href="data/admin2015.html" target="import">2015年</a></li>
+                            <li id="setting-admin2016"><a href="data/admin2016.html" target="import">2016年</a></li>
+                        </ul>
+                    <li class="first-level">
+                        <a href="#" >教学楼</a>
+                    </li>
+                        <ul class="list-unstyled second-level" style="display:none;">
+                            <li><a href="data/teachbuild2015.html" target="import">2015年</a></li>
+                            <li><a href="data/teachbuild2016.html" target="import">2016年</a></li>
+                        </ul>
+                  <!--  <span class="caret"></span>-->
+                    <li class="first-level">
+                        <a href="#" >食堂</a>
+                    </li>
+                        <ul class="list-unstyled second-level" style="display:none;">
+                            <li><a href="data/canteen2015.html" target="import">2015年</a></li>
+                            <li><a href="data/canteen2016.html" target="import">2016年</a></li>
+                        </ul>
+                </ul>
+            </div>
+     </div>
+        <iframe scrolling="no" frameborder="0"  class="body-content" name="import">
+            <!--<h4>图书馆用电量查询</h4>
+            <hr>
+            <select class="form-control">
+                <option>201501</option>
+                <option>201502</option>
+                <option>201503</option>
+                <option>201504</option>
+                <option>201505</option>
+            </select>
+            <div style="width: 50%">
+                <canvas id="canvas" height="450" width="600"></canvas>
+            </div>-->
+
+        </iframe>
+<!--<script src="/js/require.js" data-main="/js/main.js" data-start="js/app/work_pa"></script>-->
+<!--<script id="libray2015-template" type="text/template">
+
+</script>-->
+</body>
+</html>

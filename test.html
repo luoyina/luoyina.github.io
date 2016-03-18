@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="styles/font-awesome.css" rel="stylesheet">
+    <script src="js/lib/jquery/jquery-1.10.2.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.js"></script>
+    <script>
+        //在HTML body部分中的JavaScripts会在页面加载的时候被执行。
+        //在HTML head部分中的JavaScripts会在被调用的时候才执行。
+        $(function(){
+            /////////////
+            var foo1 = "Hello";
+            (function() {
+                var bar1 = " World";
+                console.log(foo1 + bar1);
+            })();
+            //console.log(foo1 + bar);
+            //////////
+            var foo2 = [];
+            foo2.push(1);
+            foo2.push(2);
+            console.log(foo2.length);
+            ////////////
+            var foo3 = {n: 1};
+            var bar3 = foo3;
+            foo3.x = foo3 = {n: 2};
+            console.log(foo3);
+            ////////////
+            console.log('one');
+            setTimeout(function() {
+                console.log('two');
+            }, 0);
+            console.log('three');
+            ///////////
+            ( window.foo4 || ( window.foo4 = "bar" ) );
+            console.log(window.foo4);
+            /////////
+            console.log("i'm a lasagna hog".split("").reverse().join(""));
+            ///////////////
+            var foo5 = 10 + '20';
+            console.log(foo5);
+            /////////////
+            for(var i= 0,j=10;i<10;i++,j--){
+                //console.log(i*j);
+            }
+            //////////////
+            var scope="global scope";
+            function checkscope(){
+                var scope ="local scope";
+                function nested(){
+                    var scope ="nested scope";
+                    return scope;
+                }
+                return nested();
+            }
+            checkscope();
+            ////////////
+            var scope2="global";
+            function f(){
+                console.log(scope2);
+                var scope2="local";
+                console.log(scope2);
+            }
+            f();
+            //////////////
+            var arr=[1,2,3,4,5,6,,];
+            console.log(arr.length);
+            //////////////
+            //w=x=y=z;
+            //q=a?b:c?d:e?f:g;
+            ///////////
+            var a=1;
+            b=(a++)+a;
+            console.log(b);
+            ///////////
+            console.log("1"+2);
+            console.log("11"<"3");
+            console.log("11"<3);
+            console.log("one"<3);////one===>NaN
+            ////////////////
+            var num=0;
+            for(var i=0;i<10;i++){
+                for(var j=0;j<5;j++){
+                    if(i==5&&j==2){
+                        break ;
+                    }
+                    num++;
+                        }
+            }
+            console.log("num="+num);
+            ////////////////
+            var num2=0;
+            outmost:for(var i=0;i<10;i++){
+                for(var j=0;j<5;j++){
+                    if(i==5&&j==2){
+                        break outmost;
+                    }
+                    num2++;
+                }
+            }
+            console.log("num2="+num2);
+            /////////continue outmost;和break；相似   //////continue去掉一个，/////   break outmost;把后面所有都去掉///////
+            var num3=0;
+            outmost:for(var i=0;i<10;i++){
+                for(var j=0;j<5;j++){
+                    if(i==5&&j==2){
+                        continue outmost;
+                    }
+                    num3++;
+                }
+            }
+            console.log("num3="+num3);
+            //////////////////////
+            var num4=0;
+            for(var i=0;i<10;i++){
+                for(var j=0;j<5;j++){
+                    if(i==5&&j==2){
+                        continue;
+                    }
+                    num4++;
+                }
+            }
+            console.log("num4="+num4);
+            ///////////////////////
+            function doadd(num1,num2){
+                if(arguments.length==1){
+                    alert(num1+10);
+                }else if(arguments.length==2){
+                    alert(arguments[0]+num2);
+                }
+            }
+            //doadd(5);
+            //doadd(1,2);
+            ///////////////////////
+            function buildurl(){
+                var qs="?debug=true";
+                with(location){
+                    var url=href+qs;
+                }
+                return url;
+            }
+            buildurl();
+            /////////////////////
+            function add(num1,num2){
+                var sum=num1+num2;
+                return sum;
+            }
+            var result=add(10,20);
+            //alert(sum);
+            /////////////////////
+            function add1(num1,num2){
+                sum1=num1+num2;
+                return sum1;
+            }
+            var result1=add1(10,20);
+            alert(sum1);
+            /////////////////////
+            function displayinfo(args){
+                var output="";
+                if(typeof args.name=="string"){
+                    output+="name:"+args.name+"\n";
+                }
+                if(typeof args.age=="number"){
+                    output+="age:"+args.age+"\n";
+                }
+                alert(output);
+            }
+            displayinfo({
+                name:"yina",
+                age:29
+            })
+        })
+        window.onload=function(){
+            var geval=eval;
+            var x="global";
+            var y="luo";
+            function f(){
+                var x="local";
+                eval("x+='changed';");
+                return x;
+            }
+         /*   function g(){
+                var y="local";
+                ///严格模式下不能用别名覆盖eval函数
+                geval("y+='changed';");
+                return y;
+            }*/
+          /*  console.log(f(),x);
+            console.log(g(),y);*/
+            var demo=document.getElementById("demo");
+            demo.src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3057606634,233327786&fm=58";
+        }
+
+    </script>
+</head>
+<body>
+<ul class="post-actions post-action-share">
+    <li class="post-action">
+        <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至QQ空间" href="<%= 'http://www.jiathis.com/send/?webid=qzone&appkey=&uid=你的uid&url=' + post.permalink + '&title=' + post.title %>">
+            <i class="fa fa-qq"></i>
+        </a>
+    </li>
+    <li class="post-action">
+        <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至人人网" href="<%= 'http://www.jiathis.com/send/?webid=renren&appkey=&uid=你的uid&url=' + post.permalink + '&title=' + post.title %>">
+            <i class="fa fa-renren"></i>
+        </a>
+    </li>
+    <li class="post-action">
+        <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至Twitter" href="<%= 'http://www.jiathis.com/send/?webid=twitter&appkey=&uid=你的uid&url=' + post.permalink + '&title=' + post.title %>">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </li>
+    <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至新浪微博" href="<%= 'http://www.jiathis.com/send/?webid=tsina&appkey=&uid=你的uid&url=' + post.permalink + '&title=' + post.title %>">
+            <i class="fa fa-weibo"></i>
+        </a>
+    </li>
+</ul>
+<img id="demo" style="width:200px;height:200px;border:1px solid red;">
+</body>
+</html>

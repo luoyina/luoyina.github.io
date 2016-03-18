@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../styles/bootstrap.css" rel="stylesheet">
+    <link href="../styles/bootstrap-theme.css" rel="stylesheet">
+    <link href="../styles/font-awesome.css" rel="stylesheet">
+    <script src="../js/lib/jquery/jquery-1.10.2.js"></script>
+    <script src="../js/lib/bootstrap/bootstrap.js"></script>
+    <script src="../js/lib/chartjs/chart.js"></script>
+    <style>
+        h4{
+            margin-left:100px;
+            vertical-align: middle;
+            float:left;
+        }
+        .choose{
+            float:left;
+            width:100px;
+            height:30px;
+            margin-left:50px;
+            margin-top:5px;
+            border-radius:5px;
+        }
+        .canvas{
+            margin-left:50px;
+            width:650px;
+            height:350px;
+        }
+    </style>
+    <script>
+        /*横坐标30天，每天实时改变数据*/
+        $(function(){
+            //var arr=[];
+            var x=0;
+            $.ajax({
+                "url": "admin02.php",
+                "type": "post",
+                success: function (_data) {
+                    var str = eval(_data);
+                    var lineChartData= {
+                        labels : [],
+                        datasets : [
+                            {
+                                label: "My First dataset",
+                                fillColor : "rgba(220,220,220,0.2)",
+                                strokeColor : "#E0E4CC",
+                                pointColor : "lightblue",
+                                pointStrokeColor : "#fff",
+                                pointHighlightFill : "#fff",
+                                pointHighlightStroke : "rgba(220,220,220,1)",
+                                data : []
+                            },
+                        ]
+                    }
+                    for (var i = x; i < x+30; i++) {
+                        lineChartData.labels.push(str[i].date);
+                    }
+                    for (var j = x; j < x+30; j++) {
+                        lineChartData.datasets[0].data.push(str[j].number);
+                    }
+                    $("#demo").html("<canvas id='canvas2' class='canvas'></canvas>")
+                    var ctx = document.getElementById("canvas2").getContext("2d");
+                    window.myLine = new Chart(ctx).Line(lineChartData, {
+                        responsive : true
+                    });
+                }
+            });
+            setInterval(function(){
+                x+=1;
+                console.log(x);
+                $.ajax({
+                    "url": "admin02.php",
+                    "type": "post",
+                    success: function (_data) {
+                        var str = eval(_data);
+                        var lineChartData= {
+                            labels : [],
+                            datasets : [
+                                {
+                                    label: "My First dataset",
+                                    fillColor : "rgba(220,220,220,0.2)",
+                                    strokeColor : "#E0E4CC",
+                                    pointColor : "lightblue",
+                                    pointStrokeColor : "#fff",
+                                    pointHighlightFill : "#fff",
+                                    pointHighlightStroke : "rgba(220,220,220,1)",
+                                    data : []
+                                },
+                            ]
+                        }
+                        for (var i = x; i < x+30; i++) {
+                            lineChartData.labels.push(str[i].date);
+                        }
+                        for (var j = x; j < x+30; j++) {
+                            lineChartData.datasets[0].data.push(str[j].number);
+                        }
+                        $("#demo").html("<canvas id='canvas2' class='canvas'></canvas>")
+                        var ctx = document.getElementById("canvas2").getContext("2d");
+                        window.myLine = new Chart(ctx).Line(lineChartData, {
+                            responsive : true
+                        });
+                    }
+                });
+            },5000)
+
+        });
+    </script>
+</head>
+<body >
+<div style="width:800px;height:500px;">
+<h4 style="margin-left:330px;">行政楼2016年度每日实时用电量监测</h4>
+    <br>
+    <p style="display:block;margin-top:20px;margin-left:20px;" >单位：度</p>
+<div id="demo"></div>
+
+</div>
+<h5 style="margin-left:860px;">单位：日</h5>
+</body>
+</html>
