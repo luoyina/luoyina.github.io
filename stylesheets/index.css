@@ -1,0 +1,39 @@
+
+nav.navbar.navbar-default{
+    background-color: white;
+    border:0;
+    background-image: none;
+    box-shadow: none;
+}
+#main{
+    margin-left:210px;
+}
+#img1,#img2{
+    margin:20px 14px;
+    border:6px solid white;
+}
+#img1{
+    position:relative;
+    z-index:10;
+    opacity: 0.9;
+}
+#img2{
+    position:absolute;
+    left:31px;
+}
+#img1:hover{
+    cursor:pointer;
+    opacity: 0;
+}
+#img1:hover #img2{
+    opacity: 1;
+}
+@media screen and (max-width:750px) {
+    #sidebar{
+        display:none;
+    }
+    #main{
+        margin-left:0;
+        width:90%;
+    }
+}

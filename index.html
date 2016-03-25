@@ -5,16 +5,115 @@
     <title>Luoyina.GitHub.io by luoyina</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  <link href="stylesheets/bootstrap.css" rel="stylesheet">
-    <link href="stylesheets/bootstrap-theme.css" rel="stylesheet">
-    <link href="stylesheets/font-awesome.css" rel="stylesheet">
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen"> -->
+      <link href="stylesheets/index.css" rel="stylesheet">
+   <link href="stylesheets/bootstrap.css" rel="stylesheet">
+   <link href="stylesheets/bootstrap-theme.css" rel="stylesheet">
+   <link href="stylesheets/font-awesome.css" rel="stylesheet">
+
+   <script src="js/jquery-1.10.2.js"></script>
+   <script src="js/bootstrap.js"></script>
+   <script>
+          $(function(){
+              $(".nav li").each(function(_index){
+                  $(this).click(function(){
+                      $(".nav li").removeClass("active").eq(_index).addClass("active");
+                      $(".content").css({"display":"none"}).eq(_index).css({"display":"block"});
+                  })
+              });
+          })
+  </script>
   </head>
   <body>
-    <div>建立</div>
+    <div class="container">
+      <div class="row" style="margin:auto 4%;">
+          <div class="col-md-2" style="padding:30px;padding-bottom:115px;position:fixed;background:lightskyblue;" id="sidebar">
+              <h1 style="color:white;font-weight:bolder;"  class="text-center">罗艺娜</h1>
+              <img id="img1" src="imgs/avatar.jpg" width="130px"  height="130px;" class="img-circle">
+              <img id="img2" src="imgs/avatar1.jpg" width="130px"  height="130px;" class="img-circle">
+              <!--  <img src="imgs/avatar2.jpg" width="130px"  height="130px;" class="img-circle" style="margin:20px 14px;border:6px solid white;">-->
+              <hr>
+              <p  style="color:white;font-weight:bolder;"  class="text-center">联系方式：</p>
+              <p class="text-center">18721918197</p>
+              <hr>
+              <p style="color:white;font-weight:bolder;"  class="text-center">电子邮箱：</p>
+              <p class="text-center">yinaluo@163.com</p>
+              <hr>
+              <p style="color:white;font-weight:bolder;" class="text-center">工作意向：</p>
+              <p class="text-center">前端开发</p>
+          </div>
+        <div class="col-md-10" id="main">
+            <nav class="navbar navbar-default" role="navigation" style="background-color:white;border:0;">
+                <div class="navbar-header" >
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#example-navbar-collapse">
+                        <span class="sr-only">切换导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="example-navbar-collapse" style="padding-left:0;padding-right:0;">
+                    <ul class="nav nav-tabs" >
+                        <li class="active"><a href="#">求职简历</a></li>
+                        <li><a href="#">社会活动</a></li>
+                        <li><a href="#" >打印简历</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="content">
+                <h3 style="width:100%;padding-left:30px;border-bottom:3px solid skyblue"><i class="fa fa-renren"></i>教育经历</h3>
+                <h4 style="padding:0 30px;">2010,9-2014,6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.dhu.edu.cn/" target="_blank">东华大学</a></h4>
+                <h4 style="padding:0 30px;">自动化              本科（本科期间绩点3.79，排名前8%）</h4>
+                <h4 style="padding:0 30px;">2014,9-2017,4   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;东华大学</h4>   <h4 style="padding:0 30px;">控制科学与工程             硕士研究生（保送）</h4>
+                <h3 style="width:100%; padding-left:30px;border-bottom:3px solid skyblue;">前端相关经验</h3>
+                <h4 style="padding:0 30px;">2015,12-2015,4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://www.uwa4d.com/" target="_blank">侑虎科技有限公司</a></h4>
+                <h4 style="padding:0 30px;">参与公司网站项目中的Web前端功能设计、开发和实现；</h4>
+                <h4 style="padding:0 30px;">利用typecho建立<a href="http://www.blog.uwa4d.com" target="_blank">blog网站</a>，与产品经理、UI配合，设计前端页面；</h4>
+                <h4 style="padding:0 30px;">手工编写HTML及CSS代码，确保代码对各种浏览器的良好兼容性；</h4>
+                <h4 style="padding:0 30px;">给网站实现分享功能，新手导航功能等</h4>
+                <h3 style="width:100%;padding-left:30px;border-bottom:3px solid skyblue">实习&实践经历</h3>
+                <h4 style="padding:0 30px;">2012,6-2012,7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同欢小区调研 </h4>
+                <h4 style="padding:0 30px;">暑期参加社会实践，团队13人对松江区同欢小区农改非生活情况进行调研，</h4><h4 style="padding:0 30px;">一起制作调查问卷，走访小区居民，分析结果。</h4>
+                <h4 style="padding:0 30px;">2013,7-2013,10  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;东亚银行（中国500强）</h4>
+                <h4 style="padding:0 30px;">在系统管理部实习，负责处理报表，收取还款文件，文件加密，</h4><h4 style="padding:0 30px;">同时参与了金贷卡项目测试。</h4>
+                <h4 style="padding:0 30px;">2013,12-2014,2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;镔翎机械工业有限公司</h4>
+                <h4 style="padding:0 30px;">在质量管理部实习，负责统计每月质量部，检查各部门在零件加工时的执行进度。</h4>
+                <h4 style="padding:0 30px;">2015,4-2015,9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赛默飞世尔有限公司（世界500强）</h4>
+                <h4 style="padding:0 30px;">在担任IT部门实习生参与IT项目管理，在sap软件中做部分技术支持的工作。</h4>
+                <h3 style="width:100%;padding-left:30px;border-bottom:3px solid skyblue">证书&能力</h3>
+                <div style="float:left;margin-left:30px;">
+                    <h4>荣誉证书</h4>
+                    <ul style="margin-left:-38px;">
+                        <li style="height:25px;">大学英语四级</li>
+                        <li style="height:25px;">大学英语六级</li>
+                        <li style="height:25px;">数据库高级工程师</li>
+                        <li style="height:25px;">机动车驾驶证</li>
+                    </ul>
+                </div>
+                <div style="float:left;margin-left:150px;">
+                    <h4>专业技能</h4>
+                    <ul style="margin-left:-38px;">
+                        <li style="height:22px;">c语言</li>
+                        <li style="height:22px;">HTML</li>
+                        <li style="height:22px;">CSS</li>
+                        <li style="height:22px;">Javascript</li>
+                        <li style="height:22px;">Jquery</li>
+                    </ul>
+                </div>
+                <div style="clear:both"></div>
+                <h3 style="width:100%;padding-left:30px;border-bottom:3px solid skyblue">个人评价</h3>
+                <h4 style="padding:0 30px;">熟悉HTML、CSS等网页制作技术，熟悉页面架构和布局；</h4>
+                <h4 style="padding:0 30px;">熟悉各种主流浏览器的CSS兼容性问题的解决；</h4>
+
+                <h4 style="padding:0 30px;">熟悉JavaScript、Ajax等Web开发技术，能进行常规Web应用的开发；</h4>
+                <h4 style="padding:0 30px;">能够利用JavaScript进行动态网页的编写。</h4>
+                <h4 style="padding:0 30px;">了解git,会用wordpress或typecho建立blog网站，初步了解php</h4>
+            </div>
+        </div>
+      </div>
+    </div>
    </body>
 </html>
