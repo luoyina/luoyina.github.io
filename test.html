@@ -1,15 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <script>
-    function demo(){
-    window.open("http://baidu.com");
-    }
-    </script>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>天气实例</title>
 </head>
 <body>
-<a href="javascript:void(0)" onclick="demo();">trest</a>
+<canvas id="canvas_circle" width="800"height="600">
+    <p>Your browserdoes not support the canvas element!</p>
+</canvas>
+
+<script type="text/javascript">
+    //温度转换成纵坐标
+    function trans(degree){
+        return 70+(40-degree)*10;
+    }
+    //简单版绘制温度图表
+    function drawChart(canvasId, maxArr, minArr, dateArr, weekArr) {
+        var weekString = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+        var pi2 = Math.PI*2;
+        var canvas =document.getElementById(canvasId);
+        var c =canvas.getContext("2d");
+        c.font ="12px Times New Roman";
+//设置背景渐变
+        var grd=c.createLinearGradient(0,25,0,300);
+        grd.addColorStop(0,"#000066");
+        grd.addColorStop(0.4,"#000055");
+        grd.addColorStop(1,"#000022");
+        c.fillStyle=grd;
+        c.fillRect(25,25,410,300);
+
+//绘制最高温度
+        c.moveTo(50, trans(maxArr[0]));
+        for(var i=1; i< 7; i++){
+            c.lineTo(50+60*i, trans(maxArr[i]));
+        }
+        c.strokeStyle="#ff4444";
+        c.stroke();
+
+//绘制点
+        c.fillStyle = "ff4444";
+        c.beginPath();
+        for(var i=0; i< 7; i++){
+            c.moveTo(50+60*i, trans(maxArr[i]));
+            c.arc(50+60*i, trans(maxArr[i]), 3, 0, pi2);
+        }
+        c.fill();
+    }
+    function init() {
+        var maxArr = [33,37,38,35,34,29,31];//最高温度
+        var dateArr = ["", "", "", "", "", "", ""];//日期
+        var weekArr = [,,,,,,];//星期
+        drawChart("canvas_circle", maxArr,  dateArr, weekArr);
+    }
+    window.onload = init;
+</script>
 </body>
 </html>
